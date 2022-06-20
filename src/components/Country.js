@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Weather from "./Weather";
 
 export default function Country({ country }) {
   const [toggle, setToggle] = useState(false);
@@ -10,8 +11,8 @@ export default function Country({ country }) {
     <li>
       <h1>{country.name.common}</h1>
       <button onClick={() => setToggle(!toggle)}>hide</button>
-      <p>{country.capital}</p>
-      <p>{country.area}</p>
+      <p>capital: {country.capital}</p>
+      <p>area: {country.area}</p>
       <h2>languages</h2>
       <ul>
         {langs.map((lang) => (
@@ -21,6 +22,11 @@ export default function Country({ country }) {
         ))}
       </ul>
       <img src={country.flags.png} alt={`The flag of ${country.name.common}`} />
+      <Weather
+        city={country.name.common}
+        lat={country.capitalInfo.latlng[0]}
+        lon={country.capitalInfo.latlng[1]}
+      />
     </li>
   ) : (
     <li>
