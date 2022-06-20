@@ -29,7 +29,7 @@ export default function App() {
         return <Country key={country.ccn3} country={country} />;
       })
     ) : (
-      list.map((country) => <p key={country.ccn3}>{country.name.common}</p>)
+      list.map((country) => <Country key={country.ccn3} country={country} />)
     );
 
   return (
