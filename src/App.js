@@ -14,8 +14,23 @@ export default function App() {
   }, []);
 
   function handleChange(e) {
-    setSearch(e.target.value.toLowerCase);
+    setSearch(e.target.value.toLowerCase());
   }
+
+  let list = countries.filter((country) =>
+    country.name.common.toLowerCase().includes(search)
+  );
+
+  let display =
+    list.length > 10 ? (
+      <p>Too many matches, specify another filter</p>
+    ) : list.length === 1 ? (
+      list.map((country) => {
+        return <Country key={country.ccn3} country={country} />;
+      })
+    ) : (
+      list.map((country) => <p key={country.ccn3}>{country.name.common}</p>)
+    );
 
   return (
     <div>
@@ -23,7 +38,7 @@ export default function App() {
         find countries
         <input type="text" value={search} onChange={handleChange} />
       </label>
-      <ul></ul>
+      <ul>{display}</ul>
     </div>
   );
 }
